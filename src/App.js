@@ -1,7 +1,13 @@
 import React from 'react';
 
-function App() {
-  return <div className="App">코드를 작성함...</div>;
-}
+import AttachTableContainer from './components/AttachTable/AttachTableContainer';
+import FileAttachForm from './components/FileAttachForm/FileAttachForm';
+
+const App = () => (
+  <>
+    <FileAttachForm />
+    <AttachTableContainer />
+  </>
+);
 
 export default App;
