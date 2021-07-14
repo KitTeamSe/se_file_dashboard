@@ -36,7 +36,10 @@ module.exports = {
         endOfLine: 'auto'
       }
     ],
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    // spread 연산자 예외
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/jsx-props-no-spreading': 'off'
   },
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } }
