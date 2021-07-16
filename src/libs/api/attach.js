@@ -17,15 +17,20 @@ export const getAttach = ({ id }) =>
   });
 
 export const addAttach = ({ multipartFile, postId, replyId }) => {
-  const queryString = qs.stringify({ postId, replyId });
+  const queryString = `?${qs.stringify({ postId, replyId })}`;
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  };
+  const formData = new FormData();
+  for (let i = 0; i < multipartFile.length; i += 1) {
+    formData.append(`multipartFile`, multipartFile[i]);
+  }
 
-  return client
-    .post(`${URL}?${queryString}`, {
-      multipartFile
-    })
-    .catch(error => {
-      throw error;
-    });
+  return client.post(`${URL}/${queryString}`, formData, config).catch(error => {
+    throw error;
+  });
 };
 
 export const removeAttach = ({ id }) =>
