@@ -1,11 +1,11 @@
 import React from 'react';
 
-import AttachTableContainer from './components/AttachTable/AttachTableContainer';
-import FileAttachForm from './components/FileAttachForm/FileAttachForm';
+import AttachTableContainer from './containers/AttachTable/AttachTableContainer';
+import FileAttachFormContainer from './containers/FileAttachForm/FileAttachFormContainer';
 
 const App = () => (
   <>
-    <FileAttachForm />
+    <FileAttachFormContainer />
     <AttachTableContainer />
   </>
 );

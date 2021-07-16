@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAttach, changeField } from '../../modules/attach';
+import { initialize, addAttach, changeField } from '../../modules/attach';
 
-import FileAttachForm from './FileAttachForm';
+import FileAttachForm from '../../components/FileAttachForm/FileAttachForm';
 
 const AttachTableContainer = () => {
   const [postId, setPostId] = useState();
@@ -10,18 +10,18 @@ const AttachTableContainer = () => {
 
   const dispatch = useDispatch();
   const { multipartFile, data, loading, error } = useSelector(({ attach }) => ({
-    multipartFile: attach.multipartFile,
+    multipartFile: attach.attach.multipartFile,
     data: attach.addAttach.data,
     loading: attach.addAttach.loading,
     error: attach.addAttach.error
   }));
 
   const onChange = e => {
-    const { value, name } = e.target;
+    const { name, files } = e.target;
     dispatch(
       changeField({
         key: name,
-        value
+        value: files
       })
     );
   };
@@ -40,25 +40,35 @@ const AttachTableContainer = () => {
     }
   }, [data, error, dispatch]);
 
-  const formProps = {
-    onChange,
-    onSubmit
-  };
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, []);
 
-  const stateProps = {
-    postId,
-    replyId,
-    setPostId,
-    setReplyId
-  };
+  // const formProps = {
+  //   onChange,
+  //   onSubmit
+  // };
+
+  // const stateProps = {
+  //   postId,
+  //   replyId,
+  //   setPostId,
+  //   setReplyId
+  // };
 
   return (
     <FileAttachForm
       data={data}
       loading={loading}
       error={error}
-      {...formProps}
-      {...stateProps}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      postId={postId}
+      replyId={replyId}
+      setPostId={setPostId}
+      setReplyId={setReplyId}
     />
   );
 };

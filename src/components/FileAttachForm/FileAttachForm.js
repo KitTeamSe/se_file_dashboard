@@ -1,36 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const FileAttachForm = () => {
-  const [files, setFiles] = useState();
-
-  const handleChange = e => {
-    const newFiles = e.target.files;
-    // e.target.files.forEach(file => formData.append(`files`, file));
-    setFiles(newFiles);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i += 1) {
-      formData.append(`files`, files[i]);
-    }
-  };
-
-  useEffect(() => {
-    console.log(files);
-  }, [files]);
+const FileAttachForm = props => {
+  const { onChange, onSubmit, data, loading, error } = props;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <input
-        id="files"
-        name="files"
+        id="multipartFile"
+        name="multipartFile"
         type="file"
         multiple
-        onChange={handleChange}
+        onChange={onChange}
       />
       <input type="submit" />
+      {!loading && data ? data : error}
     </form>
   );
 };

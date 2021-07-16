@@ -32,7 +32,6 @@ const [
 
 // Action Creators
 export const initialize = createAction(INITIALIZE);
-export const initializeAdd = createAction(ADD_ATTACH);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
@@ -96,7 +95,11 @@ export function* attachSaga() {
 
 // reducer (handleActions => switch문 대체)
 const initialState = {
-  multipartFile: [],
+  attach: {
+    multipartFile: [],
+    postId: '',
+    replyId: ''
+  },
   loadAttach: reducerUtils.initial(),
   loadAttachList: reducerUtils.initial(),
   addAttach: reducerUtils.initial(),
