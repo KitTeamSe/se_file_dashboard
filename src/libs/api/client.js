@@ -22,19 +22,4 @@ axios.interceptors.response.use(
   }
 );
 
-export const tokenHeader = token => ({
-  headers: {
-    'X-AUTH-TOKEN': token
-  }
-});
-
-export const checkToken = error => {
-  if (
-    error.message === 'Network Error' ||
-    (error.response.status === 403 && error.response.data.code === 'GE03') ||
-    (error.response.status === 400 && error.response.data.code === 'GE05')
-  )
-    localStorage.clear();
-};
-
 export default client;

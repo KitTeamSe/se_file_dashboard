@@ -1,12 +1,13 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import * as api from '../libs/api/auth';
+import * as api from '../../libs/api/auth';
 import {
   createRequestSaga,
   createRequestActionTypes
-} from '../libs/createRequestSaga';
+} from '../../libs/createRequestSaga';
 
+// Actions
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const INITIALIZE_AUTH = 'auth/INITIALIZE_AUTH';
@@ -22,6 +23,7 @@ export const changeField = createAction(
   ({ form, key, value }) => ({ form, key, value })
 );
 
+// Action Creators
 export const initializeForm = createAction(INITIALIZE_FORM, form => form);
 export const initializeAuth = createAction(INITIALIZE_AUTH);
 
@@ -52,11 +54,9 @@ export const signup = createAction(
   })
 );
 
-export const signin = createAction(SIGNIN, ({ id, pw }) => ({
-  id,
-  pw
-}));
+export const signin = createAction(SIGNIN, ({ id, pw }) => ({ id, pw }));
 
+// Sagas
 const signupSaga = createRequestSaga(SIGNUP, api.signup);
 const signinSaga = createRequestSaga(SIGNIN, api.signin);
 
@@ -65,6 +65,7 @@ export function* authSaga() {
   yield takeLatest(SIGNIN, signinSaga);
 }
 
+// reducer (handleActions => switch문 대체)
 const initialState = {
   signup: {
     answer: '',

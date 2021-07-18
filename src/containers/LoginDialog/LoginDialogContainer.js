@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeField,
@@ -7,9 +6,9 @@ import {
   initializeAuth,
   signin
 } from '../../modules/auth';
+import LoginDialog from '../../components/LoginDialog/LoginDialog';
 
-const LoginDialogContainer = ({ handleClose }) => {
-  const [error, setError] = useState(null);
+const LoginDialogContainer = () => {
   const dispatch = useDispatch();
   const { form, auths, authError } = useSelector(({ auth }) => ({
     form: auth.signin,
@@ -29,23 +28,23 @@ const LoginDialogContainer = ({ handleClose }) => {
   };
 
   const onSubmit = e => {
-    console.log(error);
     e.preventDefault();
     const { id, pw } = form;
     if (id === '') {
-      setError('ID 및 비밀번호를 입력하세요');
+      console.log('ID 및 비밀번호를 입력하세요');
       return;
     }
     if (pw.length < 4 || pw.length > 12) {
-      setError('비밀번호 4자 이상 12자 이하');
+      console.log('비밀번호 4자 이상 12자 이하');
       return;
     }
     dispatch(signin({ id, pw }));
+    dispatch(initializeForm('signin'));
   };
 
   useEffect(() => {
     if (authError) {
-      setError('로그인 실패');
+      console.log(authError);
     }
     if (auths) {
       localStorage.setItem(
@@ -54,36 +53,10 @@ const LoginDialogContainer = ({ handleClose }) => {
       );
       dispatch(initializeAuth());
       dispatch(initializeForm('signin'));
-      handleClose();
     }
   }, [auths, authError, dispatch]);
 
-  return (
-    <form onSubmit={onSubmit}>
-      <input
-        id="id"
-        name="id"
-        label="ID"
-        onChange={onChange}
-        value={form.id}
-        type="id"
-      />
-      <input
-        id="pw"
-        name="pw"
-        label="PW"
-        onChange={onChange}
-        value={form.pw}
-        type="password"
-      />
-    </form>
-  );
+  return <LoginDialog onSubmit={onSubmit} onChange={onChange} form={form} />;
 };
-
-LoginDialogContainer.propTypes = {
-  handleClose: PropTypes.func.isRequired
-};
-
-LoginDialogContainer.defaultProps = {};
 
 export default LoginDialogContainer;
