@@ -1,11 +1,15 @@
 import React from 'react';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 const LogoutDialog = ({ onLogout }) => {
   return (
     <>
-      <button type="submit" onClick={onLogout}>
-        log out
-      </button>
+      <MeetingRoomIcon
+        fontSize="large"
+        type="submit"
+        onClick={onLogout}
+        className="logout_button"
+      />
     </>
   );
 };

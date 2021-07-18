@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 
 import './styles/reset.css';
+import './styles/LoginDialog.css';
 import App from './App';
 import rootReducer, { rootSaga } from './modules';
 import reportWebVitals from './reportWebVitals';
