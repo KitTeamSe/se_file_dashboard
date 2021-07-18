@@ -1,13 +1,13 @@
 import React from 'react';
 
-import DropZoneContainer from './containers/DropZone/DropZoneContainer';
-import AttachTableContainer from './containers/AttachTable/AttachTableContainer';
 // import FileAttachFormContainer from './containers/FileAttachForm/FileAttachFormContainer';
+import AttachTableContainer from './containers/AttachTable/AttachTableContainer';
+import FileAttachDropZone from './containers/FileAttachDropZone/FileAttachDropZoneContainer';
 
 const App = () => (
   <>
-    <DropZoneContainer />
     {/* <FileAttachFormContainer /> */}
+    <FileAttachDropZone />
     <AttachTableContainer />
   </>
 );
