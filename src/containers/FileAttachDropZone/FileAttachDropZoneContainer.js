@@ -54,9 +54,16 @@ const FileAttachContainer = () => {
     );
   };
 
-  const onSubmit = async e => {
+  // const onSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(addAttach({ multipartFile, postId, replyId }));
+  // };
+
+  const onSubmit = e => {
     e.preventDefault();
-    dispatch(addAttach({ multipartFile, postId, replyId }));
+    for (let i = 0; i < multipartFile.length; i += 1) {
+      dispatch(addAttach({ multipartFile: multipartFile[i], postId, replyId }));
+    }
   };
 
   useEffect(() => {
