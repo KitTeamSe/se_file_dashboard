@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './styles/LoginDialog.css';
 
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
