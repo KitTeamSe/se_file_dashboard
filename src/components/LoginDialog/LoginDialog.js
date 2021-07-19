@@ -21,52 +21,43 @@ const LoginDialog = ({ onSubmit, onChange, form }) => {
     <>
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
-          Open form dialog
+          Log In
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Subscribe</DialogTitle>
+          <DialogTitle>관리자 로그인</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
+            <DialogContentText>아이디 admin</DialogContentText>
+            <DialogContentText>비밀번호 se75407540</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
               fullWidth
               variant="standard"
+              id="id"
+              name="id"
+              label="ID"
+              onChange={onChange}
+              value={form.id}
+              type="id"
+            />
+            <TextField
+              margin="dense"
+              fullWidth
+              variant="standard"
+              id="pw"
+              name="pw"
+              label="PW"
+              onChange={onChange}
+              value={form.pw}
+              type="password"
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Subscribe</Button>
+            <Button onClick={handleClose}>취소</Button>
+            <Button onClick={(handleClose, onSubmit)}>로그인</Button>
           </DialogActions>
         </Dialog>
       </div>
-      <form>
-        <input
-          id="id"
-          name="id"
-          label="ID"
-          onChange={onChange}
-          value={form.id}
-          type="id"
-        />
-        <input
-          id="pw"
-          name="pw"
-          label="PW"
-          onChange={onChange}
-          value={form.pw}
-          type="password"
-        />
-      </form>
-      <button type="submit" onClick={onSubmit}>
-        login
-      </button>
     </>
   );
 };
