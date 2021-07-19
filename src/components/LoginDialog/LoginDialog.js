@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const LoginDialog = ({ onSubmit, onChange, form }) => {
   const [open, setOpen] = React.useState(false);
@@ -20,9 +21,12 @@ const LoginDialog = ({ onSubmit, onChange, form }) => {
   return (
     <>
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Log In
-        </Button>
+        <AccountCircleIcon
+          fontSize="large"
+          type="submit"
+          onClick={handleClickOpen}
+          className="login_button"
+        />
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>관리자 로그인</DialogTitle>
           <DialogContent>
