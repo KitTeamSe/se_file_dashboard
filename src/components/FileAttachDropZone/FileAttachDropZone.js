@@ -9,36 +9,39 @@ import {
   Button,
   Dialog,
   DialogTitle,
-  FormControl
+  FormControl,
+  TextField
 } from '@material-ui/core';
 
 const getColor = props => {
-  if (props.isDragAccept) {
+  const { isDragAccept, isDragReject, isDragActive, multipartFile } = props;
+  if (isDragAccept) {
     return '#00e676';
   }
-  if (props.isDragReject) {
+  if (isDragReject) {
     return '#ff1744';
   }
-  if (props.isDragActive) {
+  if (isDragActive) {
     return '#2196f3';
   }
-  if (props.multipartFile.length) {
+  if (multipartFile.length) {
     return '#000000';
   }
   return '#cccccc';
 };
 
 const getComment = props => {
-  if (props.isDragAccept) {
+  const { isDragAccept, isDragReject, isDragActive, multipartFile } = props;
+  if (isDragAccept) {
     return '✅ 파일 추가';
   }
-  if (props.isDragReject) {
+  if (isDragReject) {
     return '❌ 파일 업로드 불가 파일이 제외됩니다';
   }
-  if (props.isDragActive) {
+  if (isDragActive) {
     return '⛔ 드래그 활성화 안됨';
   }
-  if (props.multipartFile.length) {
+  if (multipartFile.length) {
     return props.multipartFile.map(file => (
       <li key={file.path}>파일 : {file.path}</li>
     ));
@@ -47,12 +50,8 @@ const getComment = props => {
 };
 
 const getAlign = props => {
-  if (
-    props.multipartFile.length &&
-    !props.isDragAccept &&
-    !props.isDragReject &&
-    !props.isDragActive
-  ) {
+  const { isDragAccept, isDragReject, isDragActive, multipartFile } = props;
+  if (multipartFile.length && !isDragAccept && !isDragReject && isDragActive) {
     return 'flex-start';
   }
   return 'center';
@@ -78,8 +77,13 @@ const FormControlStyled = styled(FormControl)`
   min-width: 500px;
 `;
 
+const Typograpphy = styled.p`
+  color: red;
+`;
+
 const DropZone = props => {
-  const { multipartFile, loading, error, handleMultipartFile } = props;
+  const { multipartFile, postId, replyId, loading, error } = props;
+  const { handleMultipartFile, onChange } = props;
   const {
     getRootProps,
     getInputProps,
@@ -117,13 +121,29 @@ const DropZone = props => {
           })
         )}
       </Container>
-      <h4>{error ? '잘못된 파일이거나 파일이 없습니다.' : null}</h4>
+      <TextField
+        id="postId"
+        name="postId"
+        placeholder="postId"
+        value={postId}
+        onChange={onChange}
+      />
+      <TextField
+        id="replyId"
+        name="replyId"
+        placeholder="replyId"
+        value={replyId}
+        onChange={onChange}
+      />
+      <Typograpphy>{error ? error.message : null}</Typograpphy>
     </>
   );
 };
 
 const FormDialog = props => {
-  const { open, handleOpen, handleClose, onSubmit, children } = props;
+  const { multipartFile, open } = props;
+  const { handleOpen, handleClose, onSubmit } = props;
+  const { children } = props;
 
   return (
     <>
@@ -143,7 +163,12 @@ const FormDialog = props => {
               >
                 취소
               </Button>
-              <Button variant="outlined" color="secondary" type="submit">
+              <Button
+                variant="outlined"
+                color="secondary"
+                type="submit"
+                disabled={!multipartFile.length}
+              >
                 추가
               </Button>
             </DialogActions>
@@ -156,11 +181,12 @@ const FormDialog = props => {
 
 const FileAttachDropZone = props => {
   const { open, handleOpen, handleClose } = props;
-  const { onSubmit, handleMultipartFile } = props;
+  const { onSubmit, onChange, handleMultipartFile } = props;
   const { loading, error, multipartFile, postId, replyId } = props;
 
   return (
     <FormDialog
+      multipartFile={multipartFile}
       open={open}
       handleClose={handleClose}
       onSubmit={onSubmit}
@@ -168,14 +194,13 @@ const FileAttachDropZone = props => {
     >
       <DropZone
         handleMultipartFile={handleMultipartFile}
+        onChange={onChange}
+        postId={postId}
+        replyId={replyId}
         loading={loading}
         error={error}
         multipartFile={multipartFile}
       />
-      <aside>
-        <h4>{postId}</h4>
-        <h4>{replyId}</h4>
-      </aside>
     </FormDialog>
   );
 };

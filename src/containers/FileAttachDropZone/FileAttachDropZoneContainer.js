@@ -45,11 +45,11 @@ const FileAttachContainer = () => {
   };
 
   const onChange = e => {
-    const { name, files } = e.target;
+    const { name, value } = e.target;
     dispatch(
       changeField({
         key: name,
-        value: files
+        value
       })
     );
   };
