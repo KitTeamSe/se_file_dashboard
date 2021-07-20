@@ -51,7 +51,7 @@ const getComment = props => {
 
 const getAlign = props => {
   const { isDragAccept, isDragReject, isDragActive, multipartFile } = props;
-  if (multipartFile.length && !isDragAccept && !isDragReject && isDragActive) {
+  if (multipartFile.length && !isDragAccept && !isDragReject && !isDragActive) {
     return 'flex-start';
   }
   return 'center';
