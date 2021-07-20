@@ -27,7 +27,7 @@ export const addAttach = ({ multipartFile, postId, replyId }) => {
   formData.append(`multipartFile`, multipartFile);
 
   return client.post(`${URL}/${queryString}`, formData, config).catch(error => {
-    throw error;
+    throw error.response.data;
   });
 };
 
