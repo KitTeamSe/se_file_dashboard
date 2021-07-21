@@ -31,22 +31,20 @@ const LoginDialogContainer = () => {
   };
 
   const onSubmit = e => {
-    console.log(error);
     e.preventDefault();
     const { id, pw } = form;
     if (id === '') {
-      setError('ID 및 비밀번호를 입력하세요');
-      console.log('ID 및 비밀번호를 입력하세요');
+      setError('ID 를 입력하세요');
       return;
     }
     if (pw.length < 4 || pw.length > 12) {
-      setError('비밀번호 4자 이상 12자 이하');
-      console.log('비밀번호 4자 이상 12자 이하');
+      setError('비밀번호는 4자 이상 12자 이하입니다');
       return;
     }
     dispatch(signin({ id, pw }));
-    dispatch(initializeForm('signin'));
-    console.log('log in');
+    if (!error) {
+      console.log('log in');
+    }
   };
 
   const onLogout = e => {
@@ -82,7 +80,12 @@ const LoginDialogContainer = () => {
       {login ? (
         <LogoutDialog onLogout={onLogout} />
       ) : (
-        <LoginDialog onSubmit={onSubmit} onChange={onChange} form={form} />
+        <LoginDialog
+          onSubmit={onSubmit}
+          onChange={onChange}
+          form={form}
+          error={error}
+        />
       )}
     </>
   );

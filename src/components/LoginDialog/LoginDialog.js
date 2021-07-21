@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 
 const LoginDialog = props => {
-  const { onSubmit, onChange, form } = props;
+  const { onSubmit, onChange, form, error } = props;
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -58,6 +58,7 @@ const LoginDialog = props => {
             value={form.pw}
             type="password"
           />
+          <div>{error}</div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>취소</Button>
