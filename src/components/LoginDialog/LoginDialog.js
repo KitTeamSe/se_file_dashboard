@@ -1,15 +1,18 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@material-ui/core';
 
-const LoginDialog = ({ onSubmit, onChange, form }) => {
-  const [open, setOpen] = React.useState(false);
+const LoginDialog = props => {
+  const { onSubmit, onChange, form } = props;
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,50 +23,48 @@ const LoginDialog = ({ onSubmit, onChange, form }) => {
   };
 
   return (
-    <>
-      <div>
-        <AccountCircleIcon
-          fontSize="large"
-          type="submit"
-          onClick={handleClickOpen}
-          className="login_button"
-        />
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>관리자 로그인</DialogTitle>
-          <DialogContent>
-            <DialogContentText>아이디 admin</DialogContentText>
-            <DialogContentText>비밀번호 se75407540</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              fullWidth
-              variant="standard"
-              id="id"
-              name="id"
-              label="ID"
-              onChange={onChange}
-              value={form.id}
-              type="id"
-            />
-            <TextField
-              margin="dense"
-              fullWidth
-              variant="standard"
-              id="pw"
-              name="pw"
-              label="PW"
-              onChange={onChange}
-              value={form.pw}
-              type="password"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>취소</Button>
-            <Button onClick={(handleClose, onSubmit)}>로그인</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    </>
+    <div>
+      <AccountCircleIcon
+        fontSize="large"
+        type="submit"
+        onClick={handleClickOpen}
+        className="login_button"
+      />
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>관리자 로그인</DialogTitle>
+        <DialogContent>
+          <DialogContentText>아이디 admin</DialogContentText>
+          <DialogContentText>비밀번호 se75407540</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            fullWidth
+            variant="standard"
+            id="id"
+            name="id"
+            label="ID"
+            onChange={onChange}
+            value={form.id}
+            type="id"
+          />
+          <TextField
+            margin="dense"
+            fullWidth
+            variant="standard"
+            id="pw"
+            name="pw"
+            label="PW"
+            onChange={onChange}
+            value={form.pw}
+            type="password"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={onSubmit}>로그인</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 

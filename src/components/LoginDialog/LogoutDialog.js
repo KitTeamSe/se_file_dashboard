@@ -1,16 +1,18 @@
 import React from 'react';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import styled from 'styled-components';
 
-const LogoutDialog = ({ onLogout }) => {
+const LogoutDialog = props => {
+  const { onLogout } = props;
+
+  const logoutButton = styled.div`
+    cursor: pointer;
+  `;
+
   return (
-    <>
-      <MeetingRoomIcon
-        fontSize="large"
-        type="submit"
-        onClick={onLogout}
-        className="logout_button"
-      />
-    </>
+    <logoutButton>
+      <MeetingRoomIcon fontSize="large" type="submit" onClick={onLogout} />
+    </logoutButton>
   );
 };
 

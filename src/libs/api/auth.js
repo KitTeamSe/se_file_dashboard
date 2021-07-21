@@ -1,4 +1,3 @@
-import axios from 'axios';
 import client from './client';
 
 export const signin = ({ id, pw }) => {
@@ -6,11 +5,9 @@ export const signin = ({ id, pw }) => {
     id: { id }.id,
     pw: { pw }.pw
   };
-  return axios
-    .post('http://swagger.se-testboard.duckdns.org/api/v1/signin/manager', data)
-    .catch(error => {
-      throw error;
-    });
+  return client.post('signin/manager', data).catch(error => {
+    throw error;
+  });
 };
 
 export const signup = ({
