@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+
 import {
   Button,
   TextField,
@@ -24,11 +26,11 @@ const LoginDialog = props => {
 
   return (
     <div>
-      <AccountCircleIcon
-        fontSize="large"
+      <FontAwesomeIcon
+        icon={faSignInAlt}
+        size="3x"
         type="submit"
         onClick={handleClickOpen}
-        className="login_button"
       />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>관리자 로그인</DialogTitle>

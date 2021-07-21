@@ -56,8 +56,7 @@ const LoginDialogContainer = () => {
 
   useEffect(() => {
     if (authError) {
-      setError('로그인 실패');
-      console.log(authError);
+      setError(String(authError));
     }
     if (auths) {
       localStorage.setItem(
@@ -67,13 +66,11 @@ const LoginDialogContainer = () => {
       dispatch(initializeAuth());
       dispatch(initializeForm('signin'));
     }
-  }, [auths, authError, dispatch]);
-
-  useEffect(() => {
     if (localStorage.getItem('token')) {
       setLogin(true);
+      setError(false);
     }
-  });
+  }, [auths, authError, dispatch]);
 
   return (
     <>
