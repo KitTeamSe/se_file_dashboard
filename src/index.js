@@ -5,6 +5,7 @@ import './styles/LoginDialog.css';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { StylesProvider } from '@material-ui/core/styles';
 import createSagaMiddleware from 'redux-saga';
 
 import './styles/reset.css';
@@ -27,11 +28,13 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <StylesProvider injectFirst>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </StylesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

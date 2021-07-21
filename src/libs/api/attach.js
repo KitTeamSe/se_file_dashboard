@@ -24,6 +24,21 @@ export const addAttach = ({ multipartFile, postId, replyId }) => {
     }
   };
   const formData = new FormData();
+  formData.append(`multipartFile`, multipartFile);
+
+  return client.post(`${URL}/${queryString}`, formData, config).catch(error => {
+    throw error.response.data;
+  });
+};
+
+export const addAttachList = ({ multipartFile, postId, replyId }) => {
+  const queryString = `?${qs.stringify({ postId, replyId })}`;
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  };
+  const formData = new FormData();
   for (let i = 0; i < multipartFile.length; i += 1) {
     formData.append(`multipartFile`, multipartFile[i]);
   }
