@@ -3,13 +3,14 @@ import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
 import * as api from '../../libs/api/attach';
 import {
-  createRequestSaga,
-  createRequestActionTypes
+  createRequestActionTypes,
+  createRequestSaga
 } from '../../libs/createRequestSaga';
 import reducerUtils from '../../libs/reducerUtils';
 
 // Actions
 const INITIALIZE = 'attach/INITIALIZE';
+const INITIALIZE_FIELD = 'attach/INITIALIZE_FIELD';
 const CHANGE_FIELD = 'attach/CHANGE_FIELD';
 const [LOAD_ATTACH, LOAD_ATTACH_SUCCESS, LOAD_ATTACH_FAILURE] =
   createRequestActionTypes('attach/LOAD_ATTACH');
@@ -32,6 +33,7 @@ const [
 
 // Action Creators
 export const initialize = createAction(INITIALIZE);
+export const initializeField = createAction(INITIALIZE_FIELD);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
@@ -111,11 +113,18 @@ const initialState = {
 export default handleActions(
   {
     [INITIALIZE]: () => initialState,
+    [INITIALIZE_FIELD]: state => ({
+      ...state,
+      attach: {
+        multipartFile: [],
+        postId: '',
+        replyId: ''
+      }
+    }),
     [CHANGE_FIELD]: (state, { payload: { key, value } }) =>
       produce(state, draft => {
         draft.attach[key] = value;
       }),
-
     [LOAD_ATTACH]: state => ({
       ...state,
       loadAttach: reducerUtils.loading(state.loadAttach.data)
