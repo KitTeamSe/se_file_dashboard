@@ -30,7 +30,7 @@ const LoginDialogContainer = () => {
     );
   };
 
-  const onSubmit = e => {
+  const onLogin = e => {
     e.preventDefault();
     const { id, pw } = form;
     if (id === '') {
@@ -78,7 +78,7 @@ const LoginDialogContainer = () => {
         <LogoutDialog onLogout={onLogout} />
       ) : (
         <LoginDialog
-          onSubmit={onSubmit}
+          onLogin={onLogin}
           onChange={onChange}
           form={form}
           error={error}

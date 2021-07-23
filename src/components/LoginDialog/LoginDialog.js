@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 
 import {
   Button,
@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 
 const LoginDialog = props => {
-  const { onSubmit, onChange, form, error } = props;
+  const { onLogin, onChange, form, error } = props;
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -25,12 +25,13 @@ const LoginDialog = props => {
   };
 
   return (
-    <div>
+    <span>
       <FontAwesomeIcon
-        icon={faSignInAlt}
+        icon={faDoorClosed}
         size="3x"
         type="submit"
         onClick={handleClickOpen}
+        style={{ cursor: 'pointer' }}
       />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>관리자 로그인</DialogTitle>
@@ -64,10 +65,10 @@ const LoginDialog = props => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>취소</Button>
-          <Button onClick={onSubmit}>로그인</Button>
+          <Button onClick={onLogin}>로그인</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </span>
   );
 };
 
