@@ -1,16 +1,20 @@
 import React from 'react';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 
-const LogoutDialog = ({ onLogout }) => {
+const LogoutDialog = props => {
+  const { onLogout } = props;
+
   return (
-    <>
-      <MeetingRoomIcon
-        fontSize="large"
+    <span>
+      <FontAwesomeIcon
+        icon={faDoorOpen}
+        size="3x"
         type="submit"
         onClick={onLogout}
-        className="logout_button"
+        style={{ cursor: 'pointer' }}
       />
-    </>
+    </span>
   );
 };
 

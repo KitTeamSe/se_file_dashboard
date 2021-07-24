@@ -11,11 +11,6 @@ import LogoutDialog from '../../components/LoginDialog/LogoutDialog';
 
 const LoginDialogContainer = () => {
   const [login, setLogin] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setLogin(true);
-    }
-  });
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const { form, auths, authError } = useSelector(({ auth }) => ({
@@ -35,23 +30,21 @@ const LoginDialogContainer = () => {
     );
   };
 
-  const onSubmit = e => {
-    console.log(error);
+  const onLogin = e => {
     e.preventDefault();
     const { id, pw } = form;
     if (id === '') {
-      setError('ID 및 비밀번호를 입력하세요');
-      alert('ID 및 비밀번호를 입력하세요');
+      setError('ID 를 입력하세요');
       return;
     }
     if (pw.length < 4 || pw.length > 12) {
-      setError('비밀번호 4자 이상 12자 이하');
-      alert('비밀번호 4자 이상 12자 이하');
+      setError('비밀번호는 4자 이상 12자 이하입니다');
       return;
     }
     dispatch(signin({ id, pw }));
-    dispatch(initializeForm('signin'));
-    console.log('log in');
+    if (!error) {
+      console.log('log in');
+    }
   };
 
   const onLogout = e => {
@@ -63,8 +56,7 @@ const LoginDialogContainer = () => {
 
   useEffect(() => {
     if (authError) {
-      setError('로그인 실패');
-      alert(authError);
+      setError(String(authError));
     }
     if (auths) {
       localStorage.setItem(
@@ -74,6 +66,10 @@ const LoginDialogContainer = () => {
       dispatch(initializeAuth());
       dispatch(initializeForm('signin'));
     }
+    if (localStorage.getItem('token')) {
+      setLogin(true);
+      setError(false);
+    }
   }, [auths, authError, dispatch]);
 
   return (
@@ -81,7 +77,12 @@ const LoginDialogContainer = () => {
       {login ? (
         <LogoutDialog onLogout={onLogout} />
       ) : (
-        <LoginDialog onSubmit={onSubmit} onChange={onChange} form={form} />
+        <LoginDialog
+          onLogin={onLogin}
+          onChange={onChange}
+          form={form}
+          error={error}
+        />
       )}
     </>
   );
