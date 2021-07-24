@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
-
+import { useDispatch } from 'react-redux';
 import {
   Button,
   TextField,
@@ -11,10 +11,12 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+import { initializeForm } from '../../modules/auth';
 
 const LoginDialog = props => {
   const { onLogin, onChange, form, error } = props;
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,6 +24,7 @@ const LoginDialog = props => {
 
   const handleClose = () => {
     setOpen(false);
+    dispatch(initializeForm('signin'));
   };
 
   return (
