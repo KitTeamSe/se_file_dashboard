@@ -67,8 +67,6 @@ const AttachTable = props => {
     isSelected
   } = props;
 
-  console.log(select);
-
   return !loading && data ? (
     <TableContainer component={Paper}>
       <Table>
