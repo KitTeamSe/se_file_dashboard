@@ -3,29 +3,40 @@ import styled from 'styled-components';
 
 import HeaderContainer from '../containers/Header/HeaderContainer';
 import SideMenuContainer from '../containers/SideMenu/SideMenuContainer';
+import AttachTableContainer from '../containers/AttachTable/AttachTableContainer';
+import FileAttachDropZoneContainer from '../containers/FileAttachDropZone/FileAttachDropZoneContainer';
 
 const drawerWidth = 180;
 const drawerHeight = 56;
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `;
 
-const ContentContainer = styled.div`
+const ContentWrapper = styled.div`
   overflow-x: hidden;
   flex-grow: 1;
-  margin: ${drawerHeight}px ${drawerWidth}px;
+  padding: 20px;
+  margin: 0 ${drawerWidth}px;
+  margin-top: ${drawerHeight}px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
 `;
 
 const TestPagePickple = () => (
   <>
-    <Container>
+    <Wrapper>
       <HeaderContainer />
       <SideMenuContainer />
-    </Container>
-    <ContentContainer>
-      <h1>픽플입니다</h1>
-    </ContentContainer>
+    </Wrapper>
+    <ContentWrapper>
+      <AttachTableContainer />
+      <ButtonWrapper>
+        <FileAttachDropZoneContainer />
+      </ButtonWrapper>
+    </ContentWrapper>
   </>
 );
 

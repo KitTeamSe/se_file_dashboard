@@ -4,31 +4,41 @@ import styled from 'styled-components';
 import HeaderContainer from '../containers/Header/HeaderContainer';
 import SideMenuContainer from '../containers/SideMenu/SideMenuContainer';
 import AttachTableContainer from '../containers/AttachTable/AttachTableContainer';
-import FileAttachFormContainer from '../containers/FileAttachForm/FileAttachFormContainer';
+import FileAttachDropZoneContainer from '../containers/FileAttachDropZone/FileAttachDropZoneContainer';
 
 const drawerWidth = 180;
 const drawerHeight = 56;
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `;
 
-const ContentContainer = styled.div`
+const ContentWrapper = styled.div`
   overflow-x: hidden;
   flex-grow: 1;
-  margin: ${drawerHeight}px ${drawerWidth}px;
+  padding: 20px;
+  margin: 0 ${drawerWidth}px;
+  margin-top: ${drawerHeight}px;
+`;
+
+const ButtonWrapper = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const TestPageSeBoard = () => (
   <>
-    <Container>
+    <Wrapper>
       <HeaderContainer />
       <SideMenuContainer />
-    </Container>
-    <ContentContainer>
+    </Wrapper>
+    <ContentWrapper>
       <AttachTableContainer />
-      <FileAttachFormContainer />
-    </ContentContainer>
+      <ButtonWrapper>
+        <FileAttachDropZoneContainer />
+      </ButtonWrapper>
+    </ContentWrapper>
   </>
 );
 
