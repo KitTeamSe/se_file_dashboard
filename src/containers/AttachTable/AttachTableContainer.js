@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAttachList } from '../../modules/attach';
+import { loadAttachList, changeSelect } from '../../modules/attach';
 
 import AttachTable from '../../components/AttachTable/AttachTable';
 
 const AttachTableContainer = () => {
-  const [select, setSelect] = useState([]);
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector(({ attach }) => ({
+  const { data, loading, error, select } = useSelector(({ attach }) => ({
     data: attach.loadAttachList.data,
     loading: attach.loadAttachList.loading,
-    error: attach.loadAttachList.error
+    error: attach.loadAttachList.error,
+    select: attach.select
   }));
 
   const handleSelect = (event, id) => {
@@ -30,17 +30,16 @@ const AttachTableContainer = () => {
       );
     }
 
-    setSelect(newSelect);
+    dispatch(changeSelect({ select: newSelect }));
   };
 
   const handleSelectAll = event => {
     if (event.target.checked) {
       const newSelects = data.data.content.map(e => e.attachId);
-      setSelect(newSelects);
+      dispatch(changeSelect({ select: newSelects }));
       return;
     }
-
-    setSelect([]);
+    dispatch(changeSelect({ select: [] }));
   };
 
   const isSelected = id => select.indexOf(id) !== -1;

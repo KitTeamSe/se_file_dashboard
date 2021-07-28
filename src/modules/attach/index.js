@@ -12,6 +12,7 @@ import reducerUtils from '../../libs/reducerUtils';
 const INITIALIZE = 'attach/INITIALIZE';
 const INITIALIZE_FIELD = 'attach/INITIALIZE_FIELD';
 const CHANGE_FIELD = 'attach/CHANGE_FIELD';
+const CHANGE_SELECT = 'attach/CHANGE_SELECT';
 const [LOAD_ATTACH, LOAD_ATTACH_SUCCESS, LOAD_ATTACH_FAILURE] =
   createRequestActionTypes('attach/LOAD_ATTACH');
 const [LOAD_ATTACH_LIST, LOAD_ATTACH_LIST_SUCCESS, LOAD_ATTACH_LIST_FAILURE] =
@@ -37,6 +38,9 @@ export const initializeField = createAction(INITIALIZE_FIELD);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
+}));
+export const changeSelect = createAction(CHANGE_SELECT, ({ select }) => ({
+  select
 }));
 export const loadAttach = createAction(LOAD_ATTACH, ({ id }) => ({
   id
@@ -102,6 +106,7 @@ const initialState = {
     postId: '',
     replyId: ''
   },
+  select: [],
   loadAttach: reducerUtils.initial(),
   loadAttachList: reducerUtils.initial(),
   addAttach: reducerUtils.initial(),
@@ -125,6 +130,10 @@ export default handleActions(
       produce(state, draft => {
         draft.attach[key] = value;
       }),
+    [CHANGE_SELECT]: (state, { payload: { select } }) => ({
+      ...state,
+      select
+    }),
     [LOAD_ATTACH]: state => ({
       ...state,
       loadAttach: reducerUtils.loading(state.loadAttach.data)
