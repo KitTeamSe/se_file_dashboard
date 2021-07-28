@@ -69,7 +69,7 @@ const AttachTable = props => {
 
   return !loading && data ? (
     <TableContainer component={Paper}>
-      <Table>
+      <Table size="small">
         <AttachTableHead
           dataCount={data.data.content.length}
           selectCount={select.length}

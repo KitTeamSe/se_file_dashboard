@@ -17,8 +17,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.div`
   overflow-x: hidden;
   flex-grow: 1;
-  padding: 20px;
-  padding-bottom: 0;
+  padding: 0 20px;
   margin: 0 ${drawerWidth}px;
   margin-top: ${drawerHeight}px;
 `;
@@ -36,11 +35,11 @@ const TestPageSeBoard = () => (
       <SideMenuContainer />
     </Wrapper>
     <ContentWrapper>
-      <AttachTableContainer />
       <ButtonWrapper>
         <FileAttachDropZoneContainer />
         <AttachDeleteContainer />
       </ButtonWrapper>
+      <AttachTableContainer />
     </ContentWrapper>
   </>
 );

@@ -45,7 +45,7 @@ const AttachTableContainer = () => {
   const isSelected = id => select.indexOf(id) !== -1;
 
   useEffect(() => {
-    const { direction, size, page } = { direction: 'ASC', size: 10, page: 1 };
+    const { direction, size, page } = { direction: 'ASC', size: 15, page: 1 };
     dispatch(loadAttachList({ direction, size, page }));
   }, [dispatch]);
 

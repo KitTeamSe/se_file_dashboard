@@ -34,7 +34,7 @@ const AttachDeleteContainer = () => {
 
   useEffect(() => {
     if (data) {
-      const { direction, size, page } = { direction: 'ASC', size: 10, page: 1 };
+      const { direction, size, page } = { direction: 'ASC', size: 15, page: 1 };
       dispatch(loadAttachList({ direction, size, page }));
       dispatch(changeSelect({ select: [] }));
       handleMessageOpen();
