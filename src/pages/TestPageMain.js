@@ -5,6 +5,7 @@ import HeaderContainer from '../containers/Header/HeaderContainer';
 import SideMenuContainer from '../containers/SideMenu/SideMenuContainer';
 import AttachTableContainer from '../containers/AttachTable/AttachTableContainer';
 import FileAttachDropZoneContainer from '../containers/FileAttachDropZone/FileAttachDropZoneContainer';
+import AttachDeleteContainer from '../containers/AttachDelete/AttachDeleteContainer';
 
 const drawerWidth = 180;
 const drawerHeight = 56;
@@ -17,6 +18,7 @@ const ContentWrapper = styled.div`
   overflow-x: hidden;
   flex-grow: 1;
   padding: 20px;
+  padding-bottom: 0;
   margin: 0 ${drawerWidth}px;
   margin-top: ${drawerHeight}px;
 `;
@@ -37,6 +39,7 @@ const TestPageSeBoard = () => (
       <AttachTableContainer />
       <ButtonWrapper>
         <FileAttachDropZoneContainer />
+        <AttachDeleteContainer />
       </ButtonWrapper>
     </ContentWrapper>
   </>
