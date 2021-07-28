@@ -34,8 +34,6 @@ const menuData = [
 const SideMenu = props => {
   const { open, handleClose } = props;
 
-  console.log(open);
-
   return (
     <Drawer variant="persistent" anchor="left" open={open}>
       <DrawerHeader>

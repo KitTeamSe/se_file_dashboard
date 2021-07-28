@@ -47,8 +47,6 @@ const TitleLogo = styled(Typography)`
 const Header = props => {
   const { open, handleOpen } = props;
 
-  console.log(open);
-
   return (
     <>
       <CssBaseline />
