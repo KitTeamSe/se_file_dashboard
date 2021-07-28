@@ -30,7 +30,7 @@ const [
   LOAD_REPLY_ATTACH_LIST,
   LOAD_REPLY_ATTACH_LIST_SUCCESS,
   LOAD_REPLY_ATTACH_LIST_FAILURE
-] = createRequestActionTypes('attach/REMOVE_ATTACH');
+] = createRequestActionTypes('attach/LOAD_REPLY_ATTACH_LIST');
 
 // Action Creators
 export const initialize = createAction(INITIALIZE);
