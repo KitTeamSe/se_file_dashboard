@@ -1,60 +1,92 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Checkbox
+} from '@material-ui/core';
 
-const AttachTableHead = () => (
-  <TableHead>
-    <TableRow>
-      <TableCell padding="checkbox">
-        <Checkbox />
-      </TableCell>
-      <TableCell>attachId</TableCell>
-      <TableCell>downloadUrl</TableCell>
-      <TableCell>fileName</TableCell>
-    </TableRow>
-  </TableHead>
-);
+const AttachTableHead = props => {
+  const { dataCount, selectCount, handleSelectAll } = props;
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            indeterminate={selectCount > 0 && selectCount < dataCount}
+            checked={dataCount > 0 && dataCount === selectCount}
+            onChange={handleSelectAll}
+          />
+        </TableCell>
+        <TableCell>attachId</TableCell>
+        <TableCell>downloadUrl</TableCell>
+        <TableCell>fileName</TableCell>
+      </TableRow>
+    </TableHead>
+  );
+};
 
 const AttachTableBody = props => {
-  const { data, loading, error } = props;
+  const { data, loading, error, handleSelect, isSelected } = props;
 
   return (
     <TableBody>
       {!loading && data
-        ? data.data.content.map(e => (
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox />
-              </TableCell>
-              <TableCell>{e.attachId}</TableCell>
-              <TableCell>
-                <a href={e.downloadUrl}>{e.fileName}</a>
-              </TableCell>
-              <TableCell>{e.fileName}</TableCell>
-            </TableRow>
-          ))
+        ? data.data.content.map(e => {
+            const selected = isSelected(e.attachId);
+            return (
+              <TableRow onClick={event => handleSelect(event, e.attachId)}>
+                <TableCell padding="checkbox">
+                  <Checkbox checked={selected} />
+                </TableCell>
+                <TableCell>{e.attachId}</TableCell>
+                <TableCell>
+                  <a href={e.downloadUrl}>{e.fileName}</a>
+                </TableCell>
+                <TableCell>{e.fileName}</TableCell>
+              </TableRow>
+            );
+          })
         : error}
     </TableBody>
   );
 };
 
 const AttachTable = props => {
-  const { data, loading, error } = props;
+  const {
+    data,
+    loading,
+    error,
+    handleSelect,
+    select,
+    handleSelectAll,
+    isSelected
+  } = props;
 
-  return (
+  console.log(select);
+
+  return !loading && data ? (
     <TableContainer component={Paper}>
       <Table>
-        <AttachTableHead />
-        <AttachTableBody data={data} loading={loading} error={error} />
+        <AttachTableHead
+          dataCount={data.data.content.length}
+          selectCount={select.length}
+          handleSelectAll={handleSelectAll}
+        />
+        <AttachTableBody
+          data={data}
+          loading={loading}
+          error={error}
+          handleSelect={handleSelect}
+          isSelected={isSelected}
+        />
       </Table>
     </TableContainer>
-  );
+  ) : null;
 };
 
 export default AttachTable;
