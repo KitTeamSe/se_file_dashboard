@@ -25,6 +25,8 @@ const AttachTableHead = props => {
         <TableCell>attachId</TableCell>
         <TableCell>downloadUrl</TableCell>
         <TableCell>fileName</TableCell>
+        <TableCell>postId</TableCell>
+        <TableCell>replyId</TableCell>
       </TableRow>
     </TableHead>
   );
@@ -36,7 +38,7 @@ const AttachTableBody = props => {
   return (
     <TableBody>
       {!loading && data
-        ? data.data.content.map(e => {
+        ? data.map(e => {
             const selected = isSelected(e.attachId);
             return (
               <TableRow
@@ -51,6 +53,8 @@ const AttachTableBody = props => {
                   <a href={e.downloadUrl}>{e.fileName}</a>
                 </TableCell>
                 <TableCell>{e.fileName}</TableCell>
+                <TableCell>{e.postId}</TableCell>
+                <TableCell>{e.replyId}</TableCell>
               </TableRow>
             );
           })
@@ -74,7 +78,7 @@ const AttachTable = props => {
     <TableContainer component={Paper}>
       <Table size="small">
         <AttachTableHead
-          dataCount={data.data.content.length}
+          dataCount={data.length}
           selectCount={select.length}
           handleSelectAll={handleSelectAll}
         />

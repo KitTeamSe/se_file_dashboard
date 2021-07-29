@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
+import qs from 'qs';
+import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAttachList, changeSelect } from '../../modules/attach';
 
 import AttachTable from '../../components/AttachTable/AttachTable';
+import Pagination from '../../components/Pagination/Pagination';
 
-const AttachTableContainer = () => {
+const AttachTableContainer = ({ location }) => {
+  const link = '';
   const dispatch = useDispatch();
   const { data, loading, error, select } = useSelector(({ attach }) => ({
     data: attach.loadAttachList.data,
@@ -45,21 +49,29 @@ const AttachTableContainer = () => {
   const isSelected = id => select.indexOf(id) !== -1;
 
   useEffect(() => {
-    const { direction, size, page } = { direction: 'ASC', size: 15, page: 1 };
+    const { direction, size } = { direction: 'ASC', size: 15 };
+    const { page = 1 } = qs.parse(location.search, { ignoreQueryPrefix: true });
     dispatch(loadAttachList({ direction, size, page }));
-  }, [dispatch]);
+  }, [dispatch, location.search]);
 
   return (
-    <AttachTable
-      data={data}
-      loading={loading}
-      error={error}
-      select={select}
-      handleSelect={handleSelect}
-      handleSelectAll={handleSelectAll}
-      isSelected={isSelected}
-    />
+    <>
+      <AttachTable
+        data={data && data.data.content}
+        loading={loading}
+        error={error}
+        select={select}
+        handleSelect={handleSelect}
+        handleSelectAll={handleSelectAll}
+        isSelected={isSelected}
+      />
+      <Pagination
+        totalPage={data ? data.data.totalPages : 1}
+        page={data ? data.data.pageable.pageNumber + 1 : 1}
+        link={link}
+      />
+    </>
   );
 };
 
-export default AttachTableContainer;
+export default withRouter(AttachTableContainer);
