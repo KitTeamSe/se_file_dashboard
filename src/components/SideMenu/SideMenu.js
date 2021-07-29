@@ -44,7 +44,7 @@ const SideMenu = props => {
       <Divider />
       <List>
         {menuData.map(e => (
-          <ListItem button component={Link} to={`/${e.key}`}>
+          <ListItem button component={Link} to={`/${e.key}`} key={e.key}>
             <ListItemText primary={e.name} />
           </ListItem>
         ))}

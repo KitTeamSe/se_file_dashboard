@@ -39,7 +39,10 @@ const AttachTableBody = props => {
         ? data.data.content.map(e => {
             const selected = isSelected(e.attachId);
             return (
-              <TableRow onClick={event => handleSelect(event, e.attachId)}>
+              <TableRow
+                key={`attach-${e.attachId}`}
+                onClick={event => handleSelect(event, e.attachId)}
+              >
                 <TableCell padding="checkbox">
                   <Checkbox checked={selected} />
                 </TableCell>
