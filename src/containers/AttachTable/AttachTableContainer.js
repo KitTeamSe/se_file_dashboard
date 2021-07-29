@@ -52,6 +52,7 @@ const AttachTableContainer = ({ location }) => {
     const { direction, size } = { direction: 'ASC', size: 15 };
     const { page = 1 } = qs.parse(location.search, { ignoreQueryPrefix: true });
     dispatch(loadAttachList({ direction, size, page }));
+    dispatch(changeSelect({ select: [] }));
   }, [dispatch, location.search]);
 
   return (
