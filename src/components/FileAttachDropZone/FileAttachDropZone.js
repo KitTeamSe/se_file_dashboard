@@ -147,7 +147,7 @@ const FormDialog = props => {
 
   return (
     <>
-      <Button variant="outlined" color="secondary" onClick={handleOpen}>
+      <Button variant="outlined" color="primary" onClick={handleOpen}>
         파일 첨부
       </Button>
       <Dialog open={open} onClose={handleClose} scroll="paper">
@@ -165,7 +165,7 @@ const FormDialog = props => {
               </Button>
               <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 type="submit"
                 disabled={!multipartFile.length}
               >

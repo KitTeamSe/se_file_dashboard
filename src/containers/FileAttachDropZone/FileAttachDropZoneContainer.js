@@ -78,7 +78,7 @@ const FileAttachContainer = () => {
   }, [data, error, dispatch]);
 
   useEffect(() => {
-    const { direction, size, page } = { direction: 'ASC', size: 100, page: 1 };
+    const { direction, size, page } = { direction: 'ASC', size: 15, page: 1 };
     dispatch(loadAttachList({ direction, size, page }));
   }, [data]);
 
