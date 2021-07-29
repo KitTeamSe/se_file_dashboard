@@ -8,9 +8,9 @@ import {
 } from '../../libs/createRequestSaga';
 
 // Actions
-const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const INITIALIZE_AUTH = 'auth/INITIALIZE_AUTH';
+const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 
 const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] =
   createRequestActionTypes('auth/SIGNUP');
@@ -18,14 +18,13 @@ const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] =
 const [SIGNIN, SIGNIN_SUCCESS, SIGNIN_FAILURE] =
   createRequestActionTypes('auth/SIGNIN');
 
+// Action Creators
+export const initializeForm = createAction(INITIALIZE_FORM, form => form);
+export const initializeAuth = createAction(INITIALIZE_AUTH);
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({ form, key, value })
 );
-
-// Action Creators
-export const initializeForm = createAction(INITIALIZE_FORM, form => form);
-export const initializeAuth = createAction(INITIALIZE_AUTH);
 
 export const signup = createAction(
   SIGNUP,
